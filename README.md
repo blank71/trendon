@@ -10,3 +10,7 @@ $ pip install -q natto-py neologdn
 $ pip install -q mastodon.py beautifulsoup4
 $ echo `mecab-config --dicdir`"/mecab-ipadic-neologd"
 ```
+
+# 使い方
+1. `config.py.sample` を元に`config.py`を作成してください。
+2. `main.py`を実行すると取得投稿数をその都度聞かれます。
