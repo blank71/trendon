@@ -14,6 +14,27 @@ max_page_num = config.max_page_num
 top_num = config.top_num
 SITE_URL = config.SITE_URL
 
+print(f"取得する投稿は {max_page_num} セットです。全部で {max_page_num * 40} 投稿です。")
+print(f"変更するなら数字を入力してください。変更しないのならEnterを。")
+
+def key():
+    input_from_key = input("Input int or Enter : ")
+    return input_from_key
+
+def check_key():
+    input_from_key = key()
+    if input_from_key == '':
+        print(f"You input Enter")
+        return max_page_num
+    elif str.isdecimal(input_from_key) == True:
+        print(f"You input int : {input_from_key}")
+        return input_from_key
+    else:
+        print(f"Please input int or Enter")
+        check_key()
+
+max_page_num = int(check_key())
+
 api_path = SITE_URL + "/api/v1/timelines/public"
 
 session = requests.Session()
