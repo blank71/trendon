@@ -5,3 +5,6 @@ max_page_num = 2
 
 # 高頻度語のうち上位いくつの単語を表示するか。
 top_num = 10
+
+# Option # https://rbtnn.github.io/mstdn-picker/index.html
+mstdn_picker_url = ""

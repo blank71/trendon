@@ -17,14 +17,11 @@ SITE_URL = config.SITE_URL
 print(f"取得する投稿は {max_page_num} セットです。全部で {max_page_num * 40} 投稿です。")
 print(f"変更するなら数字を入力してください。変更しないのならEnterを。")
 
-def key():
-    input_from_key = input("Input int or Enter : ")
-    return input_from_key
 
 def check_key():
-    input_from_key = key()
+    input_from_key = input("Input int or Enter : ")
     if input_from_key == '':
-        print(f"You input Enter")
+        print(f"You input Enter\n")
         return max_page_num
     elif str.isdecimal(input_from_key) == True:
         print(f"You input int : {input_from_key}")
@@ -48,7 +45,7 @@ for i in range(0, max_page_num):
   statuses = res.json()
   toots.extend([s["spoiler_text"] + " " + BeautifulSoup(s["content"], "html.parser").text for s in statuses])
   link_header = requests.utils.parse_header_links(res.headers['Link'].rstrip('>').replace('>,<', ',<'))
-  print(f"{i+1}th loop\nThe last toot was created at: {res.json()[-1]['created_at']}")
+  print(f"{i+1}th loop. The last toot was created at: {res.json()[-1]['created_at']}")
   next_link = link_header[0]["url"]
   res = session.get(next_link)
   time.sleep(1)
@@ -68,9 +65,7 @@ def extract_words(tagger, sentence):
             words.append(surface)
     return words
 
-stop_words = {
-  "さん", "そう", "名前", "今日", "これ", "ここ", "きた", "やつ", "どこ", "www", "自分", "記事"
-}
+stop_words = config.stop_words
 
 stop_pattern = r"\d+"
 
@@ -88,5 +83,5 @@ for t in toots:
       continue
     cnt[w] += 1
 
-print(f"Top {top_num} words in past {max_page_num * 40} toots")
+print(f"\nTop {top_num} words in past {max_page_num * 40} toots")
 print(cnt.most_common(top_num))
